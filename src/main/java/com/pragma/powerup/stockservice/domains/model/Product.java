@@ -8,15 +8,15 @@ public class Product {
     private BigDecimal price;
     private String description;
     private String urlImage;
-    private Long quantity;
-    private Integer categoryId;
-    private Integer brandId;
-    private  Integer userId;
+    private BigDecimal quantity;
+    private Long categoryId;
+    private Long brandId;
+    private  Long userId;
 
     public Product() {
     }
 
-    public Product(Long id, String name, BigDecimal price, String description, String urlImage, Long quantity, Integer categoryId, Integer brandId, Integer userId) {
+    public Product(Long id, String name, BigDecimal price, String description, String urlImage, BigDecimal quantity, Long categoryId, Long brandId, Long userId) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -68,35 +68,35 @@ public class Product {
         this.urlImage = urlImage;
     }
 
-    public Long getQuantity() {
+    public BigDecimal getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(BigDecimal quantity) {
         this.quantity = quantity;
     }
 
-    public Integer getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
     }
 
-    public Integer getBrandId() {
+    public Long getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Integer brandId) {
+    public void setBrandId(Long brandId) {
         this.brandId = brandId;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

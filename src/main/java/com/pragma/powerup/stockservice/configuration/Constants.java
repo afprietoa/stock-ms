@@ -19,6 +19,9 @@ public class Constants {
     // exceptions
     public static final String RESPONSE_ERROR_MESSAGE_KEY = "error";
     public  static final String DIFFERENT_PRODUCT_DELETE_ERROR = "The product belong other product.";
+
+    public static final String EMPTY_FIELD_EXCEPTION_MESSAGE = "Field %s can not be empty";
+    public static final String NEGATIVE_NOT_ALLOWED_EXCEPTION_MESSAGE = "Field %s can not receive negative values";
     //
     public static final String SWAGGER_TITLE_MESSAGE = "Monitoring Management";
     public static final String SWAGGER_DESCRIPTION_MESSAGE = "Management API REST";
