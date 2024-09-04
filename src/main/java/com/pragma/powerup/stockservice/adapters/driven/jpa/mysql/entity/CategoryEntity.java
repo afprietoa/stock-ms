@@ -25,5 +25,4 @@ public class CategoryEntity {
     private LocalDateTime dateCreated;
     @UpdateTimestamp
     private LocalDateTime dateUpdated;
-
 }

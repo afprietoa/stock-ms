@@ -59,7 +59,7 @@ public class BrandRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
                     @ApiResponse(responseCode = "409", description = "Brand pagination failed.",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("product/allByPagination")
+    @GetMapping("brand/allByPagination")
     public Page<BrandPaginationResponseDto> getPaginationBrand(@RequestParam Integer pageSize, @RequestParam String sortBy){
         return brandHandler.getPaginationBrand(pageSize, sortBy);
     }
@@ -70,7 +70,7 @@ public class BrandRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
                     @ApiResponse(responseCode = "409", description = "Brand pagination failed.",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("product/allByList")
+    @GetMapping("brand/allByList")
     public List<BrandListResponseDto> getListBrand(){
         return brandHandler.getListBrand();
     }
@@ -81,7 +81,7 @@ public class BrandRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
                     @ApiResponse(responseCode = "404", description = "Brand not found.",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("product/{idBrand}")
+    @GetMapping("brand/{idBrand}")
     public ResponseEntity<BrandResponseDto> getBrand(@PathVariable Long idBrand) {
         return ResponseEntity.ok(brandHandler.getBrand(idBrand));
     }
@@ -93,7 +93,7 @@ public class BrandRestController {
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
                     @ApiResponse(responseCode = "409", description = "Brand deleted fail",
                             content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @DeleteMapping("product/{idBrand}")
+    @DeleteMapping("brand/{idBrand}")
     public ResponseEntity<Map<String, String>> deleteBrand(@PathVariable Long idBrand){
         brandHandler.deleteBrand(idBrand);
         return ResponseEntity.status(HttpStatus.OK)

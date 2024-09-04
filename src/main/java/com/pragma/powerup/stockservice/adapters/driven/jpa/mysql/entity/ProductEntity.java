@@ -30,6 +30,7 @@ public class ProductEntity {
     @Column(name="quantity")
     private BigDecimal quantity;
     @ManyToOne
+    //@JoinColumn(name = "brand_id")
     private BrandEntity brandId;
     @ManyToMany
     @JoinTable(
@@ -39,6 +40,7 @@ public class ProductEntity {
     )
     // @JsonIgnoreProperties("products")
     private Set<CategoryEntity> categories;
+    @Column(name="user_id")
     private  Long userId;
     @CreationTimestamp
     private LocalDateTime dateCreated;

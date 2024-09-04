@@ -1,6 +1,7 @@
 package com.pragma.powerup.stockservice.adapters.driving.http.dto.response;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 public record ProductResponseDto(
         Long id,
@@ -9,9 +10,9 @@ public record ProductResponseDto(
         String description,
         String urlImage,
         Long quantity,
-        Integer categoryId,
-        Integer brandId,
-        Integer userId
+        Set<CategoryResponseDto> category,
+        BrandResponseDto brand,
+        Long userId
 ) {
     @Override
     public Long id() {
@@ -44,17 +45,17 @@ public record ProductResponseDto(
     }
 
     @Override
-    public Integer categoryId() {
-        return categoryId;
+    public Set<CategoryResponseDto> category() {
+        return category;
     }
 
     @Override
-    public Integer brandId() {
-        return brandId;
+    public BrandResponseDto brand() {
+        return brand;
     }
 
     @Override
-    public Integer userId() {
+    public Long userId() {
         return userId;
     }
 }

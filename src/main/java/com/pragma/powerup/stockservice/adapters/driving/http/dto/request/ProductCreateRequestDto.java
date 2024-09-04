@@ -1,6 +1,7 @@
 package com.pragma.powerup.stockservice.adapters.driving.http.dto.request;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 public record ProductCreateRequestDto(
          String name,
@@ -8,8 +9,8 @@ public record ProductCreateRequestDto(
          String description,
          String urlImage,
          Long quantity,
-         Integer categoryId,
-         Integer brandId,
-         Integer userId
+         Set<Long> categoryIds,
+         Long brandId,
+         Long userId
 ) {
 }
