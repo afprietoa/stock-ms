@@ -1,7 +1,7 @@
 package com.pragma.powerup.stockservice.adapters.driving.http.dto.response;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 public record ProductPaginationResponseDto(
         Long id,
@@ -10,7 +10,7 @@ public record ProductPaginationResponseDto(
         String description,
         String urlImage,
         Long quantity,
-        Set<CategoryResponseDto> category,
+        List<CategoryResponseDto> category,
         BrandResponseDto brand,
         Long userId
 ) {

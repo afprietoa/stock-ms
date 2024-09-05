@@ -15,27 +15,9 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IBrandEntityMapper {
 
-    @Mapping(source = "id", target = "idBrand")
     BrandEntity toBrandEntity(Brand brand);
-
-    @Mapping(source = "idBrand", target = "id")
     Brand toBrand(BrandEntity brandEntity);
-
-    @Named("mapIdToBrandEntity")
-    default BrandEntity mapIdToBrandEntity(Long id) {
-        if (id == null) {
-            return null;
-        }
-        BrandEntity brandEntity = new BrandEntity();
-        brandEntity.setIdBrand(id);
-        return brandEntity;
-    }
-
-    @Named("mapBrandEntityToId")
-    default Long mapBrandEntityToId(BrandEntity brandEntity) {
-        if (brandEntity == null) {
-            return null;
-        }
-        return brandEntity.getIdBrand();
-    }
+    BrandResponseDto toBrandResponseDto(BrandEntity brandEntity);
+    BrandPaginationResponseDto toBrandPaginationResponseDto(BrandEntity brandEntity);
+    BrandListResponseDto toBrandListResponseDto(BrandEntity brandEntity);
 }

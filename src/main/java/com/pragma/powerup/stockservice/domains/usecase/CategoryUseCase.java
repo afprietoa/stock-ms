@@ -27,7 +27,7 @@ public class CategoryUseCase implements ICategoryServicePort {
 
     @Override
     public void updateCategory(Category category) {
-        Category tempCategory = categoryResponseMapper.toCategory(this.getCategory(category.getId()));
+        Category tempCategory = categoryResponseMapper.toCategory(this.getCategory(category.getIdCategory()));
         tempCategory.setName(category.getName());
         tempCategory.setDescription(category.getDescription());
         categoryPersistencePort.saveCategory(tempCategory);

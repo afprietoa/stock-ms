@@ -10,28 +10,20 @@ import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring",
-        uses = {IBrandEntityMapper.class, ICategoryEntityMapper.class},
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        unmappedSourcePolicy = ReportingPolicy.IGNORE)
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
+        uses = {IBrandEntityMapper.class, ICategoryEntityMapper.class})
 public interface IProductEntityMapper {
 
-    @Mapping(source = "brandId", target = "brandId", qualifiedByName = "mapIdToBrandEntity")
-    @Mapping(source = "categoryId", target = "categories", qualifiedByName = "mapIdsToCategoryEntities")
+
+
     ProductEntity toProductEntity(Product product);
 
-    @Mapping(source = "brandId", target = "brandId", qualifiedByName = "mapBrandEntityToId")
-    @Mapping(source = "categories", target = "categoryId", qualifiedByName = "mapCategoryEntitiesToIds")
     Product toProduct(ProductEntity productEntity);
 
-    @Mapping(source = "brandId", target = "brandId", qualifiedByName = "mapBrandEntityToId")
-    @Mapping(source = "categories", target = "categoryId", qualifiedByName = "mapCategoryEntitiesToIds")
     ProductResponseDto toProductResponseDto(ProductEntity productEntity);
 
-    @Mapping(source = "brandId", target = "brandId", qualifiedByName = "mapBrandEntityToId")
-    @Mapping(source = "categories", target = "categoryId", qualifiedByName = "mapCategoryEntitiesToIds")
     ProductPaginationResponseDto toProductPaginationResponseDto(ProductEntity productEntity);
 
-    @Mapping(source = "brandId", target = "brandId", qualifiedByName = "mapBrandEntityToId")
-    @Mapping(source = "categories", target = "categoryId", qualifiedByName = "mapCategoryEntitiesToIds")
     ProductListResponseDto toProductListResponseDto(ProductEntity productEntity);
 }

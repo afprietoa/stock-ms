@@ -1,25 +1,25 @@
 package com.pragma.powerup.stockservice.domains.model;
 
 public class Category {
-    private Long id;
+    private Long idCategory;
     private String name;
     private String description;
 
     public Category() {
     }
 
-    public Category(Long id, String name, String description) {
-        this.id = id;
+    public Category(Long idCategory, String name, String description) {
+        this.idCategory = idCategory;
         this.name = name;
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdCategory() {
+        return idCategory;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdCategory(Long idCategory) {
+        this.idCategory = idCategory;
     }
 
     public String getName() {

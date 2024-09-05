@@ -1,39 +1,40 @@
 package com.pragma.powerup.stockservice.domains.model;
 
 import java.math.BigDecimal;
+import java.util.Set;
 
 public class Product {
-    private Long id;
+    private Long idProduct;
     private String name;
     private BigDecimal price;
     private String description;
     private String urlImage;
     private BigDecimal quantity;
-    private Long categoryId;
+    private Set<Long> categoryId;
     private Long brandId;
     private  Long userId;
 
     public Product() {
     }
 
-    public Product(Long id, String name, BigDecimal price, String description, String urlImage, BigDecimal quantity, Long categoryId, Long brandId, Long userId) {
-        this.id = id;
+    public Product(Long idProduct, Long userId, Long brandId, BigDecimal quantity, String description, String name, BigDecimal price, String urlImage, Set<Long> categoryId) {
+        this.idProduct = idProduct;
+        this.userId = userId;
+        this.brandId = brandId;
+        this.quantity = quantity;
+        this.description = description;
         this.name = name;
         this.price = price;
-        this.description = description;
         this.urlImage = urlImage;
-        this.quantity = quantity;
         this.categoryId = categoryId;
-        this.brandId = brandId;
-        this.userId = userId;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdProduct() {
+        return idProduct;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdProduct(Long idProduct) {
+        this.idProduct = idProduct;
     }
 
     public String getName() {
@@ -76,11 +77,11 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Long getCategoryId() {
+    public Set<Long> getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public void setCategoryId(Set<Long> categoryId) {
         this.categoryId = categoryId;
     }
 

@@ -27,7 +27,7 @@ public class BrandUseCase implements IBrandServicePort {
 
     @Override
     public void updateBrand(Brand brand) {
-        Brand tempBrand = brandResponseMapper.toBrand(this.getBrand(brand.getId()));
+        Brand tempBrand = brandResponseMapper.toBrand(this.getBrand(brand.getIdBrand()));
         tempBrand.setName(brand.getName());
         tempBrand.setDescription(brand.getDescription());
         brandPersistencePort.saveBrand(tempBrand);

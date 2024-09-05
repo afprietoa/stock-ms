@@ -18,41 +18,9 @@ import java.util.stream.Collectors;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface ICategoryEntityMapper {
 
-    @Named("mapIdToCategoryEntity")
-    default CategoryEntity mapIdToCategoryEntity(Long id) {
-        if (id == null) {
-            return null;
-        }
-        CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setIdCategory(id);
-        return categoryEntity;
-    }
-
-    @Named("mapCategoryEntityToId")
-    default Long mapCategoryEntityToId(CategoryEntity categoryEntity) {
-        if (categoryEntity == null) {
-            return null;
-        }
-        return categoryEntity.getIdCategory();
-    }
-
-    @Named("mapIdsToCategoryEntities")
-    default Set<CategoryEntity> mapIdsToCategoryEntities(Set<Long> ids) {
-        if (ids == null) {
-            return null;
-        }
-        return ids.stream()
-                .map(this::mapIdToCategoryEntity)
-                .collect(Collectors.toSet());
-    }
-
-    @Named("mapCategoryEntitiesToIds")
-    default Set<Long> mapCategoryEntitiesToIds(Set<CategoryEntity> categories) {
-        if (categories == null) {
-            return null;
-        }
-        return categories.stream()
-                .map(this::mapCategoryEntityToId)
-                .collect(Collectors.toSet());
-    }
+    CategoryEntity toCategoryEntity(Category category);
+    Category toCategory(CategoryEntity categoryEntity);
+    CategoryResponseDto toCategoryResponseDto(CategoryEntity categoryEntity);
+    CategoryPaginationResponseDto toCategoryPaginationResponseDto(CategoryEntity categoryEntity);
+    CategoryListResponseDto toCategoryListResponseDto(CategoryEntity categoryEntity);
 }

@@ -1,25 +1,25 @@
 package com.pragma.powerup.stockservice.domains.model;
 
 public class Brand {
-    private Long id;
+    private Long idBrand;
     private String name;
     private String description;
 
     public Brand() {
     }
 
-    public Brand(Long id, String name, String description) {
-        this.id = id;
+    public Brand(Long idBrand, String name, String description) {
+        this.idBrand = idBrand;
         this.name = name;
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
+    public Long getIdBrand() {
+        return idBrand;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdBrand(Long idBrand) {
+        this.idBrand = idBrand;
     }
 
     public String getName() {

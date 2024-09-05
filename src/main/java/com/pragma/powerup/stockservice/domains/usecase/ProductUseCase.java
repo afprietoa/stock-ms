@@ -27,7 +27,7 @@ public class ProductUseCase implements IProductServicePort {
 
     @Override
     public void updateProduct(Product product) {
-        Product tempProduct = productResponseMapper.toProduct(this.getProduct(product.getId()));
+        Product tempProduct = productResponseMapper.toProduct(this.getProduct(product.getIdProduct()));
         tempProduct.setName(product.getName());
         tempProduct.setPrice(product.getPrice());
         tempProduct.setDescription(product.getDescription());
