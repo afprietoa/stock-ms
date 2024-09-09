@@ -25,28 +25,28 @@ public class CategoryHandlerImpl implements ICategoryHandler {
         categoryServicePort.createCategory(categoryRequestMapper.toCreateCategory(CategoryCreateRequestDto));
     }
 
-    @Override
-    public void updateCategory(CategoryUpdateRequestDto CategoryUpdateRequestDto) {
-        categoryServicePort.updateCategory(categoryRequestMapper.toUpdateCategory(CategoryUpdateRequestDto));
-    }
-
-    @Override
-    public Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy) {
-        return categoryServicePort.getPaginationCategory(pageSize, sortBy);
-    }
-
-    @Override
-    public List<CategoryListResponseDto> getListCategory() {
-        return categoryServicePort.getListCategory();
-    }
-
-    @Override
-    public CategoryResponseDto getCategory(Long idCategory) {
-        return categoryServicePort.getCategory(idCategory);
-    }
-
-    @Override
-    public void deleteCategory(Long idCategory) {
-        categoryServicePort.deleteCategory(idCategory);
-    }
+//    @Override
+//    public void updateCategory(CategoryUpdateRequestDto CategoryUpdateRequestDto) {
+//        categoryServicePort.updateCategory(categoryRequestMapper.toUpdateCategory(CategoryUpdateRequestDto));
+//    }
+//
+//    @Override
+//    public Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy) {
+//        return categoryServicePort.getPaginationCategory(pageSize, sortBy);
+//    }
+//
+//    @Override
+//    public List<CategoryListResponseDto> getListCategory() {
+//        return categoryServicePort.getListCategory();
+//    }
+//
+//    @Override
+//    public CategoryResponseDto getCategory(Long idCategory) {
+//        return categoryServicePort.getCategory(idCategory);
+//    }
+//
+//    @Override
+//    public void deleteCategory(Long idCategory) {
+//        categoryServicePort.deleteCategory(idCategory);
+//    }
 }

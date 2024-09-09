@@ -11,5 +11,5 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface ICategoryRequestMapper {
     Category toCreateCategory(CategoryCreateRequestDto categoryCreateRequestDto);
-    Category toUpdateCategory(CategoryUpdateRequestDto categoryUpdateRequestDto);
+//    Category toUpdateCategory(CategoryUpdateRequestDto categoryUpdateRequestDto);
 }

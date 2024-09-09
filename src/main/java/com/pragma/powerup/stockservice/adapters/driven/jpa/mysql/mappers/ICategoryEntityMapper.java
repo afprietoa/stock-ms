@@ -20,7 +20,7 @@ public interface ICategoryEntityMapper {
 
     CategoryEntity toCategoryEntity(Category category);
     Category toCategory(CategoryEntity categoryEntity);
-    CategoryResponseDto toCategoryResponseDto(CategoryEntity categoryEntity);
-    CategoryPaginationResponseDto toCategoryPaginationResponseDto(CategoryEntity categoryEntity);
-    CategoryListResponseDto toCategoryListResponseDto(CategoryEntity categoryEntity);
+//    CategoryResponseDto toCategoryResponseDto(CategoryEntity categoryEntity);
+//    CategoryPaginationResponseDto toCategoryPaginationResponseDto(CategoryEntity categoryEntity);
+//    CategoryListResponseDto toCategoryListResponseDto(CategoryEntity categoryEntity);
 }

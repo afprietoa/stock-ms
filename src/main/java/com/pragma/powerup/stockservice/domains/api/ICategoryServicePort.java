@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface ICategoryServicePort {
     void createCategory(Category category);
-    void updateCategory(Category category);
-    Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy);
-    List<CategoryListResponseDto> getListCategory();
-    CategoryResponseDto getCategory(Long idCategory);
-    void deleteCategory(Long idCategory);
+//    void updateCategory(Category category);
+//    Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy);
+//    List<CategoryListResponseDto> getListCategory();
+//    CategoryResponseDto getCategory(Long idCategory);
+//    void deleteCategory(Long idCategory);
 }

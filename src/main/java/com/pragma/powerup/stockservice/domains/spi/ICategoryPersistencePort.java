@@ -10,8 +10,9 @@ import java.util.List;
 
 public interface ICategoryPersistencePort {
     void saveCategory(Category category);
-    Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy);
-    List<CategoryListResponseDto> getListCategory();
-    CategoryResponseDto getCategoryById(Long idCategory);
-    void deleteCategory(Long idCategory);
+    Category getCategoryByName(String categoryName);
+//    Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy);
+//    List<CategoryListResponseDto> getListCategory();
+//    CategoryResponseDto getCategoryById(Long idCategory);
+//    void deleteCategory(Long idCategory);
 }

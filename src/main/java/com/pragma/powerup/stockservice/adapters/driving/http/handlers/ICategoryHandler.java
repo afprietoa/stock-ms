@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface ICategoryHandler {
     void createCategory(CategoryCreateRequestDto categoryCreateRequestDto);
-    void updateCategory(CategoryUpdateRequestDto categoryUpdateRequestDto);
-    Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy);
-    List<CategoryListResponseDto> getListCategory();
-    CategoryResponseDto getCategory(Long idCategory);
-    void deleteCategory(Long idCategory);
+//    void updateCategory(CategoryUpdateRequestDto categoryUpdateRequestDto);
+//    Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy);
+//    List<CategoryListResponseDto> getListCategory();
+//    CategoryResponseDto getCategory(Long idCategory);
+//    void deleteCategory(Long idCategory);
 }

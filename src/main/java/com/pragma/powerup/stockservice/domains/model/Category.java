@@ -8,8 +8,8 @@ public class Category {
     public Category() {
     }
 
-    public Category(Long idCategory, String name, String description) {
-        this.idCategory = idCategory;
+    public Category( String name, String description) {
+
         this.name = name;
         this.description = description;
     }

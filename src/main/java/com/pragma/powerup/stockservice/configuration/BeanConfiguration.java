@@ -55,7 +55,10 @@ public class BeanConfiguration {
     }
     @Bean
     public ICategoryServicePort categoryServicePort(){
-        return new CategoryUseCase(categoryPersistencePort(), categoryResponseMapper);
+        return new CategoryUseCase(
+                categoryPersistencePort()
+//                , categoryResponseMapper
+        );
     }
 
     @Bean
