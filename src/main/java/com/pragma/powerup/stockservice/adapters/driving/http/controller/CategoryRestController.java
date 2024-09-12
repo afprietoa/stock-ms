@@ -4,8 +4,10 @@ import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.Categor
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryUpdateRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryListResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPaginationResponseDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.ICategoryHandler;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -40,6 +42,29 @@ public class CategoryRestController {
         categoryHandler.createCategory(categoryCreateRequestDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, CATEGORY_CREATED_MESSAGE));
+    }
+
+    @Operation(summary = "Get Category Pagination",
+        responses = {
+                @ApiResponse(responseCode = "201", description = "Category pagination was successful",
+                        content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+                @ApiResponse(responseCode = "409", description = "Category pagination failed.",
+                        content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @GetMapping("/categories")
+    public ResponseEntity<PagedList<CategoryResponseDto>> getCategoriesPaged(
+            @RequestParam int pageNumber,
+            @RequestParam int pageSize,
+            @RequestParam(required = false) String orderBy,
+            @RequestParam(required = false) boolean isAscending
+    ) {
+        CategoryPagingRequestDto requestDto = new CategoryPagingRequestDto();
+        requestDto.setPageNumber(pageNumber);
+        requestDto.setPageSize(pageSize);
+        requestDto.setOrderBy(orderBy);
+        requestDto.setAscending(isAscending);
+
+        PagedList<CategoryResponseDto> categories = categoryHandler.getCategoriesPaged(requestDto);
+        return ResponseEntity.ok(categories);
     }
 
 //    @Operation(summary = "Updated a Category",

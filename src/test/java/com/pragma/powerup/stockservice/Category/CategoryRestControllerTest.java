@@ -2,9 +2,12 @@ package com.pragma.powerup.stockservice.Category;
 
 import com.pragma.powerup.stockservice.adapters.driving.http.controller.CategoryRestController;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryCreateRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.ICategoryHandler;
 import com.pragma.powerup.stockservice.adapters.driving.http.mapper.ICategoryRequestMapper;
 import com.pragma.powerup.stockservice.domains.api.ICategoryServicePort;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -18,8 +21,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.util.List;
+
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -29,17 +36,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = CategoryRestController.class)
 public class CategoryRestControllerTest {
 
-
     @Autowired
     private WebApplicationContext webApplicationContext;
 
     private MockMvc mockMvc;
-
-    @MockBean
-    private ICategoryServicePort categoryServicePort;
-
-    @MockBean
-    private ICategoryRequestMapper categoryRequestMapper;
 
     @MockBean
     private ICategoryHandler categoryHandler;
@@ -76,5 +76,19 @@ public class CategoryRestControllerTest {
                         .content(categoryRequestJson))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value("Categoría creada con éxito"));
+    }
+
+    @Test
+    void getCategoriesPaged_ShouldReturnPagedCategories() throws Exception {
+        // Arrange
+        CategoryResponseDto categoryResponseDto = new CategoryResponseDto(1L, "Electronics", "Devices");
+        PagedList<CategoryResponseDto> pagedCategories = new PagedList<>(List.of(categoryResponseDto), 1, 10, 1);
+        when(categoryHandler.getCategoriesPaged(any(CategoryPagingRequestDto.class))).thenReturn(pagedCategories);
+
+        // Act & Assert
+        mockMvc.perform(get("/api/categories?pageNumber=1&pageSize=10"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].name").value("Electronics"))
+                .andExpect(jsonPath("$.totalElements").value(1));
     }
 }

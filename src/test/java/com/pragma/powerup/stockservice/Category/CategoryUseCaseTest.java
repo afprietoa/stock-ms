@@ -1,7 +1,9 @@
 package com.pragma.powerup.stockservice.Category;
 
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.exceptions.*;
 import com.pragma.powerup.stockservice.domains.model.Category;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.spi.ICategoryPersistencePort;
 import com.pragma.powerup.stockservice.domains.usecase.CategoryUseCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,10 +16,10 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @TestPropertySource(locations = "classpath:application-dev.yml")
@@ -77,5 +79,20 @@ public class CategoryUseCaseTest {
 
         // Act & Assert
         assertThrows(CategoryNameAlreadyExistsException.class, () -> categoryUseCase.createCategory(existingCategory));
+    }
+
+    @Test
+    void testGetPaginationCategoryByOrder_ShouldReturnPagedCategories() {
+        // Arrange
+        CategoryPagingRequestDto requestDto = new CategoryPagingRequestDto();
+        PagedList<Category> pagedCategories = new PagedList<>(List.of(new Category("Electronics", "Devices")), 1, 10, 1);
+        when(categoryPersistencePort.getPaginationCategories(requestDto)).thenReturn(pagedCategories);
+
+        // Act
+        PagedList<Category> result = categoryUseCase.getPaginationCategoryByOrder(requestDto);
+
+        // Assert
+        assertEquals(1, result.getTotalElements());
+        assertEquals(1, result.getTotalPages());
     }
 }

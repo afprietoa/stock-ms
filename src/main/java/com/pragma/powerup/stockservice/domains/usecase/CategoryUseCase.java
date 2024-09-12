@@ -2,11 +2,13 @@ package com.pragma.powerup.stockservice.domains.usecase;
 
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryListResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPaginationResponseDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.mapper.ICategoryResponseMapper;
 import com.pragma.powerup.stockservice.domains.api.ICategoryServicePort;
 import com.pragma.powerup.stockservice.domains.exceptions.*;
 import com.pragma.powerup.stockservice.domains.model.Category;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.spi.ICategoryPersistencePort;
 import org.springframework.data.domain.Page;
 
@@ -46,6 +48,11 @@ public class CategoryUseCase implements ICategoryServicePort {
         if (field.length() > maxLength) {
             throw new CategoryFieldIsTooLongException(fieldName + " excede el límite de " + maxLength + " caracteres.");
         }
+    }
+
+    @Override
+    public PagedList<Category> getPaginationCategoryByOrder(CategoryPagingRequestDto requestDto) {
+        return categoryPersistencePort.getPaginationCategories(requestDto);
     }
 
 

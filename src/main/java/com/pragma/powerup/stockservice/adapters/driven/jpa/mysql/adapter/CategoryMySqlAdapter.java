@@ -7,8 +7,10 @@ import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.mappers.ICatego
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.repositories.ICategoryRepository;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryListResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPaginationResponseDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryResponseDto;
 import com.pragma.powerup.stockservice.domains.model.Category;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.spi.ICategoryPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class CategoryMySqlAdapter implements ICategoryPersistencePort {
@@ -34,6 +37,23 @@ public class CategoryMySqlAdapter implements ICategoryPersistencePort {
         return categoryRepository.findByName(categoryName)
                 .map(categoryMapper::toCategory)
                 .orElse(null);
+    }
+
+    @Override
+    public PagedList<Category> getPaginationCategories(CategoryPagingRequestDto requestDto) {
+        Pageable pageable = PageRequest.of(
+                requestDto.getPageNumber() - 1,
+                requestDto.getPageSize(),
+                requestDto.isAscending() ? Sort.by(requestDto.getOrderBy()).ascending() : Sort.by(requestDto.getOrderBy()).descending()
+        );
+
+        Page<CategoryEntity> pagedResult = categoryRepository.findAll(pageable);
+
+        List<Category> categories = pagedResult.getContent().stream()
+                .map(categoryMapper::toCategory)
+                .collect(Collectors.toList());
+
+        return PagedList.of(categories, requestDto.getPageNumber(), requestDto.getPageSize(), pagedResult.getTotalElements());
     }
 
 //    @Override

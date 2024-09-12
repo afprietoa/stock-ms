@@ -10,7 +10,12 @@ public final class DomainConstants {
         PRICE,
         QUANTITY,
         CONTACTNUMBER
-    }
+    };
+
+    public enum OrderClause{
+        ASC,
+        DESC
+    };
 
     public static final String FIELD_NAME_NULL_MESSAGE = "Field 'name' cannot be null";
     public static final String FIELD_PRICE_NULL_MESSAGE = "Field 'price' cannot be null";

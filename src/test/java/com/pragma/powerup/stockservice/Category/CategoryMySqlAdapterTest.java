@@ -4,14 +4,22 @@ import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.adapter.Categor
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.entity.CategoryEntity;
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.mappers.ICategoryEntityMapper;
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.repositories.ICategoryRepository;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.model.Category;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -97,5 +105,29 @@ public class CategoryMySqlAdapterTest {
         });
 
         assertEquals("Database error", exception.getMessage());
+    }
+
+    @Test
+    public void getPaginationCategories_ShouldReturnPagedResult() {
+        // Arrange
+        CategoryPagingRequestDto requestDto = new CategoryPagingRequestDto();
+        requestDto.setPageNumber(1);
+        requestDto.setPageSize(10);
+
+        Pageable pageable = PageRequest.of(0, 10); // Página 0 porque es base 0
+        List<CategoryEntity> categoryEntities = Collections.singletonList(categoryEntity); // Simulamos la lista de entidades
+        Page<CategoryEntity> pagedResult = new PageImpl<>(categoryEntities, pageable, 1); // Crea un Page<CategoryEntity> simulado
+
+        when(categoryRepository.findAll(any(Pageable.class))).thenReturn(pagedResult); // Simula la llamada a findAll con cualquier Pageable
+        when(categoryEntityMapper.toCategory(categoryEntity)).thenReturn(category); // Mapea la entidad a la categoría
+
+        // Act
+        PagedList<Category> result = categoryMySqlAdapter.getPaginationCategories(requestDto);
+
+        // Assert
+        assertNotNull(result); // Asegúrate de que el resultado no es null
+        assertEquals(1, result.getTotalElements()); // Verifica el número total de elementos
+        assertEquals(1, result.getTotalPages()); // Verifica el número total de páginas
+        assertEquals(Collections.singletonList(category), result.getContent()); // Verifica el contenido
     }
 }
