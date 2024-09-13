@@ -17,7 +17,8 @@ public interface IBrandEntityMapper {
 
     BrandEntity toBrandEntity(Brand brand);
     Brand toBrand(BrandEntity brandEntity);
-    BrandResponseDto toBrandResponseDto(BrandEntity brandEntity);
-    BrandPaginationResponseDto toBrandPaginationResponseDto(BrandEntity brandEntity);
-    BrandListResponseDto toBrandListResponseDto(BrandEntity brandEntity);
+//    Brand toBrand(BrandEntity brandEntity);
+//    BrandResponseDto toBrandResponseDto(BrandEntity brandEntity);
+//    BrandPaginationResponseDto toBrandPaginationResponseDto(BrandEntity brandEntity);
+//    BrandListResponseDto toBrandListResponseDto(BrandEntity brandEntity);
 }

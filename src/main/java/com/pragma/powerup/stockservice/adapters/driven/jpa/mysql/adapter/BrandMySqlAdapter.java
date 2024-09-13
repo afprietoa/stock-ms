@@ -30,27 +30,34 @@ public class BrandMySqlAdapter implements IBrandPersistencePort {
     }
 
     @Override
-    public Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy) {
-        Pageable pageable = PageRequest.of(0,pageSize, Sort.by(sortBy).ascending());
-        Page<BrandEntity> brandEntityPage = brandRepository.findAll(pageable);
-        return brandEntityPage.map(brandMapper::toBrandPaginationResponseDto);
+    public Brand getBrandByName(String brandName) {
+        return brandRepository.findByName(brandName)
+                .map(brandMapper::toBrand)
+                .orElse(null);
     }
 
-    @Override
-    public List<BrandListResponseDto> getListBrand() {
-        List<BrandEntity> brandEntityList = brandRepository.findAll();
-        if (brandEntityList.isEmpty()) throw new NoDataFoundException();
-        return brandEntityList.stream().map(brandMapper::toBrandListResponseDto).toList();
-    }
-
-    @Override
-    public BrandResponseDto getBrandById(Long idBrand) {
-        BrandEntity brandEntity = brandRepository.findById(idBrand).orElseThrow(BrandNotFoundException::new);
-        return brandMapper.toBrandResponseDto(brandEntity);
-    }
-
-    @Override
-    public void deleteBrand(Long idBrand) {
-        brandRepository.deleteById(idBrand);
-    }
+//    @Override
+//    public Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy) {
+//        Pageable pageable = PageRequest.of(0,pageSize, Sort.by(sortBy).ascending());
+//        Page<BrandEntity> brandEntityPage = brandRepository.findAll(pageable);
+//        return brandEntityPage.map(brandMapper::toBrandPaginationResponseDto);
+//    }
+//
+//    @Override
+//    public List<BrandListResponseDto> getListBrand() {
+//        List<BrandEntity> brandEntityList = brandRepository.findAll();
+//        if (brandEntityList.isEmpty()) throw new NoDataFoundException();
+//        return brandEntityList.stream().map(brandMapper::toBrandListResponseDto).toList();
+//    }
+//
+//    @Override
+//    public BrandResponseDto getBrandById(Long idBrand) {
+//        BrandEntity brandEntity = brandRepository.findById(idBrand).orElseThrow(BrandNotFoundException::new);
+//        return brandMapper.toBrandResponseDto(brandEntity);
+//    }
+//
+//    @Override
+//    public void deleteBrand(Long idBrand) {
+//        brandRepository.deleteById(idBrand);
+//    }
 }

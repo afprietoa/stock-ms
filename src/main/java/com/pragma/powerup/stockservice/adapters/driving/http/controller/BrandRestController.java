@@ -40,64 +40,64 @@ public class BrandRestController {
                 .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, BRAND_CREATED_MESSAGE));
     }
 
-    @Operation(summary = "Updated a Brand",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Brand updated successfully.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "409", description = "Brand update fail.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @PatchMapping("brand")
-    public ResponseEntity<Map<String,String>> updateBrand(@Valid @RequestBody BrandUpdateRequestDto brandUpdateRequestDto){
-        brandHandler.updateBrand(brandUpdateRequestDto);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, BRAND_UPDATED_MESSAGE));
-    }
-
-    @Operation(summary = "Get Product Pagination",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Brand pagination was successful",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "409", description = "Brand pagination failed.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("brand/allByPagination")
-    public Page<BrandPaginationResponseDto> getPaginationBrand(@RequestParam Integer pageSize, @RequestParam String sortBy){
-        return brandHandler.getPaginationBrand(pageSize, sortBy);
-    }
-
-    @Operation(summary = "Get Product List",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Brand pagination was successful.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "409", description = "Brand pagination failed.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("brand/allByList")
-    public List<BrandListResponseDto> getListBrand(){
-        return brandHandler.getListBrand();
-    }
-
-    @Operation(summary = "Get Brand",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Brand returned.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "404", description = "Brand not found.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("brand/{idBrand}")
-    public ResponseEntity<BrandResponseDto> getBrand(@PathVariable Long idBrand) {
-        return ResponseEntity.ok(brandHandler.getBrand(idBrand));
-    }
-
-
-    @Operation(summary = "Delete Brand",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Brand deleted successfully",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "409", description = "Brand deleted fail",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @DeleteMapping("brand/{idBrand}")
-    public ResponseEntity<Map<String, String>> deleteBrand(@PathVariable Long idBrand){
-        brandHandler.deleteBrand(idBrand);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, BRAND_DELETED_MESSAGE));
-    }
+//    @Operation(summary = "Updated a Brand",
+//            responses = {
+//                    @ApiResponse(responseCode = "201", description = "Brand updated successfully.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "409", description = "Brand update fail.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @PatchMapping("brand")
+//    public ResponseEntity<Map<String,String>> updateBrand(@Valid @RequestBody BrandUpdateRequestDto brandUpdateRequestDto){
+//        brandHandler.updateBrand(brandUpdateRequestDto);
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, BRAND_UPDATED_MESSAGE));
+//    }
+//
+//    @Operation(summary = "Get Product Pagination",
+//            responses = {
+//                    @ApiResponse(responseCode = "201", description = "Brand pagination was successful",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "409", description = "Brand pagination failed.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @GetMapping("brand/allByPagination")
+//    public Page<BrandPaginationResponseDto> getPaginationBrand(@RequestParam Integer pageSize, @RequestParam String sortBy){
+//        return brandHandler.getPaginationBrand(pageSize, sortBy);
+//    }
+//
+//    @Operation(summary = "Get Product List",
+//            responses = {
+//                    @ApiResponse(responseCode = "201", description = "Brand pagination was successful.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "409", description = "Brand pagination failed.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @GetMapping("brand/allByList")
+//    public List<BrandListResponseDto> getListBrand(){
+//        return brandHandler.getListBrand();
+//    }
+//
+//    @Operation(summary = "Get Brand",
+//            responses = {
+//                    @ApiResponse(responseCode = "200", description = "Brand returned.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "404", description = "Brand not found.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @GetMapping("brand/{idBrand}")
+//    public ResponseEntity<BrandResponseDto> getBrand(@PathVariable Long idBrand) {
+//        return ResponseEntity.ok(brandHandler.getBrand(idBrand));
+//    }
+//
+//
+//    @Operation(summary = "Delete Brand",
+//            responses = {
+//                    @ApiResponse(responseCode = "201", description = "Brand deleted successfully",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "409", description = "Brand deleted fail",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @DeleteMapping("brand/{idBrand}")
+//    public ResponseEntity<Map<String, String>> deleteBrand(@PathVariable Long idBrand){
+//        brandHandler.deleteBrand(idBrand);
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, BRAND_DELETED_MESSAGE));
+//    }
 
 }

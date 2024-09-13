@@ -25,29 +25,29 @@ public class BrandHandlerImpl implements IBrandHandler {
         brandServicePort.createBrand(brandRequestMapper.toCreateBrand(BrandCreateRequestDto));
     }
 
-    @Override
-    public void updateBrand(BrandUpdateRequestDto BrandUpdateRequestDto) {
-        brandServicePort.updateBrand(brandRequestMapper.toUpdateBrand(BrandUpdateRequestDto));
-    }
-
-    @Override
-    public Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy) {
-        return brandServicePort.getPaginationBrand(pageSize, sortBy);
-    }
-
-    @Override
-    public List<BrandListResponseDto> getListBrand() {
-        return brandServicePort.getListBrand();
-    }
-
-    @Override
-    public BrandResponseDto getBrand(Long idBrand) {
-        return brandServicePort.getBrand(idBrand);
-    }
-
-    @Override
-    public void deleteBrand(Long idBrand) {
-        brandServicePort.deleteBrand(idBrand);
-    }
+//    @Override
+//    public void updateBrand(BrandUpdateRequestDto BrandUpdateRequestDto) {
+//        brandServicePort.updateBrand(brandRequestMapper.toUpdateBrand(BrandUpdateRequestDto));
+//    }
+//
+//    @Override
+//    public Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy) {
+//        return brandServicePort.getPaginationBrand(pageSize, sortBy);
+//    }
+//
+//    @Override
+//    public List<BrandListResponseDto> getListBrand() {
+//        return brandServicePort.getListBrand();
+//    }
+//
+//    @Override
+//    public BrandResponseDto getBrand(Long idBrand) {
+//        return brandServicePort.getBrand(idBrand);
+//    }
+//
+//    @Override
+//    public void deleteBrand(Long idBrand) {
+//        brandServicePort.deleteBrand(idBrand);
+//    }
 
 }

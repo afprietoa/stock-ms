@@ -11,5 +11,5 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IBrandRequestMapper {
     Brand toCreateBrand(BrandCreateRequestDto brandCreateRequestDto);
-    Brand toUpdateBrand(BrandUpdateRequestDto brandUpdateRequestDto);
+//    Brand toUpdateBrand(BrandUpdateRequestDto brandUpdateRequestDto);
 }

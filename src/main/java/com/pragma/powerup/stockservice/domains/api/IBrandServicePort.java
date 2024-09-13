@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface IBrandServicePort {
     void createBrand(Brand brand);
-    void updateBrand(Brand brand);
-    Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy);
-    List<BrandListResponseDto> getListBrand();
-    BrandResponseDto getBrand(Long idBrand);
-    void deleteBrand(Long idBrand);
+//    void updateBrand(Brand brand);
+//    Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy);
+//    List<BrandListResponseDto> getListBrand();
+//    BrandResponseDto getBrand(Long idBrand);
+//    void deleteBrand(Long idBrand);
 }

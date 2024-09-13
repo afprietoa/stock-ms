@@ -34,11 +34,11 @@ public class BeanConfiguration {
 
     private final ICategoryRepository categoryRepository;
     private final ICategoryEntityMapper categoryEntityMapper;
-    private final ICategoryResponseMapper categoryResponseMapper;
+//    private final ICategoryResponseMapper categoryResponseMapper;
 
     private final IBrandRepository brandRepository;
     private final IBrandEntityMapper brandEntityMapper;
-    private final IBrandResponseMapper brandResponseMapper;
+//    private final IBrandResponseMapper brandResponseMapper;
 
     @Bean
     public IProductPersistencePort productPersistencePort(){
@@ -67,6 +67,8 @@ public class BeanConfiguration {
     }
     @Bean
     public IBrandServicePort brandServicePort(){
-        return new BrandUseCase(brandPersistencePort(), brandResponseMapper);
+        return new BrandUseCase(brandPersistencePort()
+//                , brandResponseMapper
+        );
     }
 }

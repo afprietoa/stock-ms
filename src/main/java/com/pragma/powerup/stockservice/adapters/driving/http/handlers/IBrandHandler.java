@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface IBrandHandler {
     void createBrand(BrandCreateRequestDto brandCreateRequestDto);
-    void updateBrand(BrandUpdateRequestDto brandUpdateRequestDto);
-    Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy);
-    List<BrandListResponseDto> getListBrand();
-    BrandResponseDto getBrand(Long idBrand);
-    void deleteBrand(Long idBrand);
+//    void updateBrand(BrandUpdateRequestDto brandUpdateRequestDto);
+//    Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy);
+//    List<BrandListResponseDto> getListBrand();
+//    BrandResponseDto getBrand(Long idBrand);
+//    void deleteBrand(Long idBrand);
 }

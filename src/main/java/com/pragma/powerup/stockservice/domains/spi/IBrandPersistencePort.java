@@ -10,8 +10,9 @@ import java.util.List;
 
 public interface IBrandPersistencePort {
     void saveBrand(Brand brand);
-    Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy);
-    List<BrandListResponseDto> getListBrand();
-    BrandResponseDto getBrandById(Long idBrand);
-    void deleteBrand(Long idBrand);
+    Brand getBrandByName(String brandName);
+//    Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy);
+//    List<BrandListResponseDto> getListBrand();
+//    BrandResponseDto getBrandById(Long idBrand);
+//    void deleteBrand(Long idBrand);
 }
