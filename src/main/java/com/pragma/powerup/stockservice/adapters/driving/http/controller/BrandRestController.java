@@ -4,6 +4,7 @@ import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandCr
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandUpdateRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.*;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.IBrandHandler;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -38,6 +39,29 @@ public class BrandRestController {
         brandHandler.createBrand(brandCreateRequestDto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, BRAND_CREATED_MESSAGE));
+    }
+
+    @Operation(summary = "Get Brand Pagination",
+            responses = {
+                    @ApiResponse(responseCode = "201", description = "Brand pagination was successful",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+                    @ApiResponse(responseCode = "409", description = "Brand pagination failed.",
+                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @GetMapping("/brands")
+    public ResponseEntity<PagedList<BrandResponseDto>> getBrandsPaged(
+            @RequestParam int pageNumber,
+            @RequestParam int pageSize,
+            @RequestParam(required = false) String orderBy,
+            @RequestParam(required = false) boolean isAscending
+    ) {
+        BrandPagingRequestDto requestDto = new BrandPagingRequestDto();
+        requestDto.setPageNumber(pageNumber);
+        requestDto.setPageSize(pageSize);
+        requestDto.setOrderBy(orderBy);
+        requestDto.setAscending(isAscending);
+
+        PagedList<BrandResponseDto> brands = brandHandler.getBrandsPaged(requestDto);
+        return ResponseEntity.ok(brands);
     }
 
 //    @Operation(summary = "Updated a Brand",

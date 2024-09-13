@@ -7,8 +7,10 @@ import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.mappers.IBrandE
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.repositories.IBrandRepository;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandListResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPaginationResponseDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandResponseDto;
 import com.pragma.powerup.stockservice.domains.model.Brand;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.spi.IBrandPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class BrandMySqlAdapter implements IBrandPersistencePort {
@@ -34,6 +37,23 @@ public class BrandMySqlAdapter implements IBrandPersistencePort {
         return brandRepository.findByName(brandName)
                 .map(brandMapper::toBrand)
                 .orElse(null);
+    }
+
+    @Override
+    public PagedList<Brand> getPaginationBrands(BrandPagingRequestDto requestDto) {
+        Pageable pageable = PageRequest.of(
+                requestDto.getPageNumber() - 1,
+                requestDto.getPageSize(),
+                requestDto.isAscending() ? Sort.by(requestDto.getOrderBy()).ascending() : Sort.by(requestDto.getOrderBy()).descending()
+        );
+
+        Page<BrandEntity> pagedResult = brandRepository.findAll(pageable);
+
+        List<Brand> brands = pagedResult.getContent().stream()
+                .map(brandMapper::toBrand)
+                .collect(Collectors.toList());
+
+        return PagedList.of(brands, requestDto.getPageNumber(), requestDto.getPageSize(), pagedResult.getTotalElements());
     }
 
 //    @Override

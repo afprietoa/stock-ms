@@ -1,7 +1,9 @@
 package com.pragma.powerup.stockservice.Brand;
 
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.exceptions.*;
 import com.pragma.powerup.stockservice.domains.model.Brand;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.spi.IBrandPersistencePort;
 import com.pragma.powerup.stockservice.domains.usecase.BrandUseCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -76,5 +79,20 @@ public class BrandUseCaseTest {
 
         // Act & Assert
         assertThrows(BrandNameAlreadyExistsException.class, () -> brandUseCase.createBrand(existingBrand));
+    }
+
+    @Test
+    void testGetPaginationBrandByOrder_ShouldReturnPagedBrands() {
+        // Arrange
+        BrandPagingRequestDto requestDto = new BrandPagingRequestDto();
+        PagedList<Brand> pagedBrands = new PagedList<>(List.of(new Brand("Electronics", "Devices")), 1, 10, 1);
+        when(brandPersistencePort.getPaginationBrands(requestDto)).thenReturn(pagedBrands);
+
+        // Act
+        PagedList<Brand> result = brandUseCase.getPaginationBrandByOrder(requestDto);
+
+        // Assert
+        assertEquals(1, result.getTotalElements());
+        assertEquals(1, result.getTotalPages());
     }
 }

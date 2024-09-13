@@ -2,7 +2,10 @@ package com.pragma.powerup.stockservice.Brand;
 
 import com.pragma.powerup.stockservice.adapters.driving.http.controller.BrandRestController;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandCreateRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.IBrandHandler;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -71,5 +74,19 @@ public class BrandRestControllerTest {
                         .content(brandRequestJson))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.message").value("Marca creada con éxito"));
+    }
+
+    @Test
+    void getBrandsPaged_ShouldReturnPagedBrands() throws Exception {
+        // Arrange
+        BrandResponseDto brandResponseDto = new BrandResponseDto(1L, "Electronics", "Devices");
+        PagedList<BrandResponseDto> pagedBrands = new PagedList<>(List.of(brandResponseDto), 1, 10, 1);
+        when(brandHandler.getBrandsPaged(any(BrandPagingRequestDto.class))).thenReturn(pagedBrands);
+
+        // Act & Assert
+        mockMvc.perform(get("/api/brands?pageNumber=1&pageSize=10"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content[0].name").value("Electronics"))
+                .andExpect(jsonPath("$.totalElements").value(1));
     }
 }

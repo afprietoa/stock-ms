@@ -4,25 +4,48 @@ import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandCr
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandUpdateRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandListResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPaginationResponseDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.IBrandHandler;
 import com.pragma.powerup.stockservice.adapters.driving.http.mapper.IBrandRequestMapper;
+import com.pragma.powerup.stockservice.adapters.driving.http.mapper.IBrandResponseMapper;
 import com.pragma.powerup.stockservice.domains.api.IBrandServicePort;
+import com.pragma.powerup.stockservice.domains.model.Brand;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class BrandHandlerImpl implements IBrandHandler {
     private final IBrandServicePort brandServicePort;
     private final IBrandRequestMapper brandRequestMapper;
+    private final IBrandResponseMapper brandResponseMapper;
 
     @Override
     public void createBrand(BrandCreateRequestDto BrandCreateRequestDto) {
         brandServicePort.createBrand(brandRequestMapper.toCreateBrand(BrandCreateRequestDto));
+    }
+
+    @Override
+    public PagedList<BrandResponseDto> getBrandsPaged(BrandPagingRequestDto requestDto) {
+        PagedList<Brand> pagedBrands = brandServicePort.getPaginationBrandByOrder(requestDto);
+        List<BrandResponseDto> responseDtos = pagedBrands.getContent().stream()
+                .map(brandResponseMapper::toBrandResponseDto)
+                .collect(Collectors.toList());
+
+        return new PagedList<>(
+                responseDtos,
+                pagedBrands.getPageNumber(),
+                pagedBrands.getPageSize(),
+                pagedBrands.getTotalElements()
+//                pagedBrands.isFirst(),
+//                pagedBrands.isLast()
+        );
     }
 
 //    @Override

@@ -1,10 +1,12 @@
 package com.pragma.powerup.stockservice.domains.usecase;
 
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.api.IBrandServicePort;
 import com.pragma.powerup.stockservice.domains.exceptions.BrandFieldIsRequiredException;
 import com.pragma.powerup.stockservice.domains.exceptions.BrandFieldIsTooLongException;
 import com.pragma.powerup.stockservice.domains.exceptions.BrandNameAlreadyExistsException;
 import com.pragma.powerup.stockservice.domains.model.Brand;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.spi.IBrandPersistencePort;
 
 public class BrandUseCase implements IBrandServicePort {
@@ -41,6 +43,12 @@ public class BrandUseCase implements IBrandServicePort {
             throw new BrandFieldIsTooLongException(fieldName + " excede el límite de " + maxLength + " caracteres.");
         }
     }
+
+    @Override
+    public PagedList<Brand> getPaginationBrandByOrder(BrandPagingRequestDto requestDto) {
+        return brandPersistencePort.getPaginationBrands(requestDto);
+    }
+
 
 //    @Override
 //    public void updateBrand(Brand brand) {

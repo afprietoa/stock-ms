@@ -4,7 +4,9 @@ import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.adapter.BrandMy
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.entity.BrandEntity;
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.mappers.IBrandEntityMapper;
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.repositories.IBrandRepository;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.model.Brand;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -103,5 +105,29 @@ public class BrandMySqlAdapterTest {
         });
 
         assertEquals("Database error", exception.getMessage());
+    }
+
+    @Test
+    public void getPaginationBrands_ShouldReturnPagedResult() {
+        // Arrange
+        BrandPagingRequestDto requestDto = new BrandPagingRequestDto();
+        requestDto.setPageNumber(1);
+        requestDto.setPageSize(10);
+
+        Pageable pageable = PageRequest.of(0, 10); // Página 0 porque es base 0
+        List<BrandEntity> brandEntities = Collections.singletonList(brandEntity); // Simulamos la lista de entidades
+        Page<BrandEntity> pagedResult = new PageImpl<>(brandEntities, pageable, 1); // Crea un Page<BrandEntity> simulado
+
+        when(brandRepository.findAll(any(Pageable.class))).thenReturn(pagedResult); // Simula la llamada a findAll con cualquier Pageable
+        when(brandEntityMapper.toBrand(brandEntity)).thenReturn(brand); // Mapea la entidad a la categoría
+
+        // Act
+        PagedList<Brand> result = brandMySqlAdapter.getPaginationBrands(requestDto);
+
+        // Assert
+        assertNotNull(result); // Asegúrate de que el resultado no es null
+        assertEquals(1, result.getTotalElements()); // Verifica el número total de elementos
+        assertEquals(1, result.getTotalPages()); // Verifica el número total de páginas
+        assertEquals(Collections.singletonList(brand), result.getContent()); // Verifica el contenido
     }
 }

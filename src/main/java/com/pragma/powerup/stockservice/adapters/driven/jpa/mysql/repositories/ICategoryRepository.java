@@ -12,6 +12,4 @@ import java.util.Optional;
 public interface ICategoryRepository extends JpaRepository<CategoryEntity, Long> {
     @Query(value = "SELECT * FROM category WHERE name = :categoryName", nativeQuery = true)
     Optional<CategoryEntity> findByName(@Param("categoryName") String categoryName);
-
-
 }
