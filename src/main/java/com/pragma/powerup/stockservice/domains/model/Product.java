@@ -1,6 +1,7 @@
 package com.pragma.powerup.stockservice.domains.model;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Set;
 
 public class Product {
@@ -10,15 +11,15 @@ public class Product {
     private String description;
     private String urlImage;
     private BigDecimal quantity;
-    private Set<Long> categoryId;
+    private List<Long> categoryIds;
     private Long brandId;
     private  Long userId;
 
     public Product() {
     }
 
-    public Product(Long idProduct, Long userId, Long brandId, BigDecimal quantity, String description, String name, BigDecimal price, String urlImage, Set<Long> categoryId) {
-        this.idProduct = idProduct;
+    public Product(Long userId, Long brandId, BigDecimal quantity, String description, String name, BigDecimal price, String urlImage, List<Long> categoryIds) {
+
         this.userId = userId;
         this.brandId = brandId;
         this.quantity = quantity;
@@ -26,7 +27,7 @@ public class Product {
         this.name = name;
         this.price = price;
         this.urlImage = urlImage;
-        this.categoryId = categoryId;
+        this.categoryIds = categoryIds;
     }
 
     public Long getIdProduct() {
@@ -77,12 +78,12 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public Set<Long> getCategoryId() {
-        return categoryId;
+    public List<Long> getCategoryIds() {
+        return categoryIds;
     }
 
-    public void setCategoryId(Set<Long> categoryId) {
-        this.categoryId = categoryId;
+    public void setCategoryIds(List<Long> categoryIds) {
+        this.categoryIds = categoryIds;
     }
 
     public Long getBrandId() {

@@ -10,8 +10,8 @@ import java.util.List;
 
 public interface IProductPersistencePort {
     void saveProduct(Product product);
-    Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy);
-    List<ProductListResponseDto> getListProduct();
-    ProductResponseDto getProductById(Long idProduct);
-    void deleteProduct(Long idProduct);
+//    Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy);
+//    List<ProductListResponseDto> getListProduct();
+//    ProductResponseDto getProductById(Long idProduct);
+//    void deleteProduct(Long idProduct);
 }

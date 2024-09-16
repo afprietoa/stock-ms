@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface IProductServicePort {
     void createProduct(Product product);
-    void updateProduct(Product product);
-    Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy);
-    List<ProductListResponseDto> getListProduct();
-    ProductResponseDto getProduct(Long idProduct);
-    void deleteProduct(Long idProduct);
+//    void updateProduct(Product product);
+//    Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy);
+//    List<ProductListResponseDto> getListProduct();
+//    ProductResponseDto getProduct(Long idProduct);
+//    void deleteProduct(Long idProduct);
 }

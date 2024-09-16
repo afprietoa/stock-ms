@@ -43,64 +43,64 @@ public class ProductRestController {
                 .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, PRODUCT_CREATED_MESSAGE));
     }
 
-    @Operation(summary = "Updated a Product",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Product updated successfully.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "409", description = "Product update fail.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @PatchMapping("product")
-    public ResponseEntity<Map<String,String>> updateProduct(@Valid @RequestBody ProductUpdateRequestDto productUpdateRequestDto){
-        productHandler.updateProduct(productUpdateRequestDto);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, PRODUCT_UPDATED_MESSAGE));
-    }
-
-    @Operation(summary = "Get Product Pagination",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Product pagination was successful",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "409", description = "Product pagination failed.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("product/allByPagination")
-    public Page<ProductPaginationResponseDto> getPaginationProduct(@RequestParam Integer pageSize, @RequestParam String sortBy){
-        return productHandler.getPaginationProduct(pageSize, sortBy);
-    }
-
-    @Operation(summary = "Get Product List",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Product pagination was successful.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "409", description = "Product pagination failed.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("product/allByList")
-    public List<ProductListResponseDto> getListProduct(){
-        return productHandler.getListProduct();
-    }
-
-    @Operation(summary = "Get Product",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "Product returned.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "404", description = "Product not found.",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @GetMapping("product/{idProduct}")
-    public ResponseEntity<ProductResponseDto> getProduct(@PathVariable Long idProduct) {
-        return ResponseEntity.ok(productHandler.getProduct(idProduct));
-    }
-
-
-    @Operation(summary = "Delete Product",
-            responses = {
-                    @ApiResponse(responseCode = "201", description = "Product deleted successfully",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
-                    @ApiResponse(responseCode = "409", description = "Product deleted fail",
-                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
-    @DeleteMapping("product/{idProduct}")
-    public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable Long idProduct){
-        productHandler.deleteProduct(idProduct);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, PRODUCT_DELETED_MESSAGE));
-    }
+//    @Operation(summary = "Updated a Product",
+//            responses = {
+//                    @ApiResponse(responseCode = "201", description = "Product updated successfully.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "409", description = "Product update fail.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @PatchMapping("product")
+//    public ResponseEntity<Map<String,String>> updateProduct(@Valid @RequestBody ProductUpdateRequestDto productUpdateRequestDto){
+//        productHandler.updateProduct(productUpdateRequestDto);
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, PRODUCT_UPDATED_MESSAGE));
+//    }
+//
+//    @Operation(summary = "Get Product Pagination",
+//            responses = {
+//                    @ApiResponse(responseCode = "201", description = "Product pagination was successful",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "409", description = "Product pagination failed.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @GetMapping("product/allByPagination")
+//    public Page<ProductPaginationResponseDto> getPaginationProduct(@RequestParam Integer pageSize, @RequestParam String sortBy){
+//        return productHandler.getPaginationProduct(pageSize, sortBy);
+//    }
+//
+//    @Operation(summary = "Get Product List",
+//            responses = {
+//                    @ApiResponse(responseCode = "201", description = "Product pagination was successful.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "409", description = "Product pagination failed.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @GetMapping("product/allByList")
+//    public List<ProductListResponseDto> getListProduct(){
+//        return productHandler.getListProduct();
+//    }
+//
+//    @Operation(summary = "Get Product",
+//            responses = {
+//                    @ApiResponse(responseCode = "200", description = "Product returned.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "404", description = "Product not found.",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @GetMapping("product/{idProduct}")
+//    public ResponseEntity<ProductResponseDto> getProduct(@PathVariable Long idProduct) {
+//        return ResponseEntity.ok(productHandler.getProduct(idProduct));
+//    }
+//
+//
+//    @Operation(summary = "Delete Product",
+//            responses = {
+//                    @ApiResponse(responseCode = "201", description = "Product deleted successfully",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+//                    @ApiResponse(responseCode = "409", description = "Product deleted fail",
+//                            content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+//    @DeleteMapping("product/{idProduct}")
+//    public ResponseEntity<Map<String, String>> deleteProduct(@PathVariable Long idProduct){
+//        productHandler.deleteProduct(idProduct);
+//        return ResponseEntity.status(HttpStatus.OK)
+//                .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, PRODUCT_DELETED_MESSAGE));
+//    }
 
 }

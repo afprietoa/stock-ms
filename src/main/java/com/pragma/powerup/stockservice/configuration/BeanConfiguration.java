@@ -46,7 +46,12 @@ public class BeanConfiguration {
     }
     @Bean
     public IProductServicePort productServicePort(){
-        return new ProductUseCase(productPersistencePort(), productResponseMapper);
+        return new ProductUseCase(
+                productPersistencePort(),
+                categoryPersistencePort(),
+                brandPersistencePort()
+//                , productResponseMapper
+        );
     }
 
     @Bean

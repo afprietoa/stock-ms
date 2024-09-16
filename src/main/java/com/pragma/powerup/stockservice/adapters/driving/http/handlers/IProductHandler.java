@@ -11,9 +11,9 @@ import java.util.List;
 
 public interface IProductHandler {
     void createProduct(ProductCreateRequestDto productCreateRequestDto);
-    void updateProduct(ProductUpdateRequestDto productUpdateRequestDto);
-    Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy);
-    List<ProductListResponseDto> getListProduct();
-    ProductResponseDto getProduct(Long idProduct);
-    void deleteProduct(Long idProduct);
+//    void updateProduct(ProductUpdateRequestDto productUpdateRequestDto);
+//    Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy);
+//    List<ProductListResponseDto> getListProduct();
+//    ProductResponseDto getProduct(Long idProduct);
+//    void deleteProduct(Long idProduct);
 }

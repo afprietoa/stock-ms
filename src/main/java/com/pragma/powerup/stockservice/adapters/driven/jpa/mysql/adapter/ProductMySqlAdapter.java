@@ -26,31 +26,32 @@ public class ProductMySqlAdapter implements IProductPersistencePort {
 
     @Override
     public void saveProduct(Product product) {
+        System.out.println("ProductEntity to be saved: " + productEntityMapper.toProductEntity(product));
         productRepository.save(productEntityMapper.toProductEntity(product));
     }
 
-    @Override
-    public Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy) {
-        Pageable pageable = PageRequest.of(0,pageSize, Sort.by(sortBy).ascending());
-        Page<ProductEntity> productEntityPage = productRepository.findAll(pageable);
-        return productEntityPage.map(productEntityMapper::toProductPaginationResponseDto);
-    }
-
-    @Override
-    public List<ProductListResponseDto> getListProduct() {
-        List<ProductEntity> productEntityList = productRepository.findAll();
-        if (productEntityList.isEmpty()) throw new NoDataFoundException();
-        return productEntityList.stream().map(productEntityMapper::toProductListResponseDto).toList();
-    }
-
-    @Override
-    public ProductResponseDto getProductById(Long idProduct) {
-        ProductEntity productEntity = productRepository.findById(idProduct).orElseThrow(ProductNotFoundException::new);
-        return productEntityMapper.toProductResponseDto(productEntity);
-    }
-
-    @Override
-    public void deleteProduct(Long idProduct) {
-        productRepository.deleteById(idProduct);
-    }
+//    @Override
+//    public Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy) {
+//        Pageable pageable = PageRequest.of(0,pageSize, Sort.by(sortBy).ascending());
+//        Page<ProductEntity> productEntityPage = productRepository.findAll(pageable);
+//        return productEntityPage.map(productEntityMapper::toProductPaginationResponseDto);
+//    }
+//
+//    @Override
+//    public List<ProductListResponseDto> getListProduct() {
+//        List<ProductEntity> productEntityList = productRepository.findAll();
+//        if (productEntityList.isEmpty()) throw new NoDataFoundException();
+//        return productEntityList.stream().map(productEntityMapper::toProductListResponseDto).toList();
+//    }
+//
+//    @Override
+//    public ProductResponseDto getProductById(Long idProduct) {
+//        ProductEntity productEntity = productRepository.findById(idProduct).orElseThrow(ProductNotFoundException::new);
+//        return productEntityMapper.toProductResponseDto(productEntity);
+//    }
+//
+//    @Override
+//    public void deleteProduct(Long idProduct) {
+//        productRepository.deleteById(idProduct);
+//    }
 }

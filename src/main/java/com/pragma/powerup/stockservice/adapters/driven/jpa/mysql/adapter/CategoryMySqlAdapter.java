@@ -56,6 +56,13 @@ public class CategoryMySqlAdapter implements ICategoryPersistencePort {
         return PagedList.of(categories, requestDto.getPageNumber(), requestDto.getPageSize(), pagedResult.getTotalElements());
     }
 
+    @Override
+    public Long getCategoryById(Long categoryId) {
+        CategoryEntity categoryEntity = categoryRepository.findById(categoryId)
+                .orElseThrow(CategoryNotFoundException::new);
+        return categoryEntity.getIdCategory(); // Suponiendo que la entidad CategoryEntity tiene un método getIdCategory()
+    }
+
 //    @Override
 //    public Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy) {
 //        Pageable pageable = PageRequest.of(0,pageSize, Sort.by(sortBy).ascending());

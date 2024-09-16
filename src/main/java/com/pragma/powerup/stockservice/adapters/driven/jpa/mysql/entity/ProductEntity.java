@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -29,18 +30,18 @@ public class ProductEntity {
     private String urlImage;
     @Column(name="quantity")
     private BigDecimal quantity;
-    @ManyToOne
-    //@JoinColumn(name = "brand_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "brand_id")
     private BrandEntity brand;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "products_categories",
             joinColumns = @JoinColumn(name = "id_product"),
             inverseJoinColumns = @JoinColumn(name = "id_category" )
     )
     // @JsonIgnoreProperties("products")
-    private Set<CategoryEntity> categories;
+    private Set<CategoryEntity> categories = new HashSet<>();
 
     @Column(name="user_id")
     private  Long userId;

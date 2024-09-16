@@ -25,28 +25,28 @@ public class ProductHandlerImpl implements IProductHandler {
         productServicePort.createProduct(productRequestMapper.toCreateProduct(productCreateRequestDto));
     }
 
-    @Override
-    public void updateProduct(ProductUpdateRequestDto productUpdateRequestDto) {
-        productServicePort.updateProduct(productRequestMapper.toUpdateProduct(productUpdateRequestDto));
-    }
-
-    @Override
-    public Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy) {
-        return productServicePort.getPaginationProduct(pageSize, sortBy);
-    }
-
-    @Override
-    public List<ProductListResponseDto> getListProduct() {
-        return productServicePort.getListProduct();
-    }
-
-    @Override
-    public ProductResponseDto getProduct(Long idProduct) {
-        return productServicePort.getProduct(idProduct);
-    }
-
-    @Override
-    public void deleteProduct(Long idProduct) {
-        productServicePort.deleteProduct(idProduct);
-    }
+//    @Override
+//    public void updateProduct(ProductUpdateRequestDto productUpdateRequestDto) {
+//        productServicePort.updateProduct(productRequestMapper.toUpdateProduct(productUpdateRequestDto));
+//    }
+//
+//    @Override
+//    public Page<ProductPaginationResponseDto> getPaginationProduct(Integer pageSize, String sortBy) {
+//        return productServicePort.getPaginationProduct(pageSize, sortBy);
+//    }
+//
+//    @Override
+//    public List<ProductListResponseDto> getListProduct() {
+//        return productServicePort.getListProduct();
+//    }
+//
+//    @Override
+//    public ProductResponseDto getProduct(Long idProduct) {
+//        return productServicePort.getProduct(idProduct);
+//    }
+//
+//    @Override
+//    public void deleteProduct(Long idProduct) {
+//        productServicePort.deleteProduct(idProduct);
+//    }
 }

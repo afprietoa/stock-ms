@@ -56,6 +56,13 @@ public class BrandMySqlAdapter implements IBrandPersistencePort {
         return PagedList.of(brands, requestDto.getPageNumber(), requestDto.getPageSize(), pagedResult.getTotalElements());
     }
 
+    @Override
+    public Long getBrandById(Long brandId) {
+        BrandEntity brandEntity = brandRepository.findById(brandId)
+                .orElseThrow(BrandNotFoundException::new);
+        return brandEntity.getIdBrand(); // Suponiendo que la entidad BrandEntity tiene un método getIdBrand()
+    }
+
 //    @Override
 //    public Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy) {
 //        Pageable pageable = PageRequest.of(0,pageSize, Sort.by(sortBy).ascending());
