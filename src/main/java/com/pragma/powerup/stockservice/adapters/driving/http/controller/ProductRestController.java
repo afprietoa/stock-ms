@@ -2,25 +2,22 @@ package com.pragma.powerup.stockservice.adapters.driving.http.controller;
 
 
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.ProductCreateRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.ProductUpdateRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.ProductListResponseDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.ProductPaginationResponseDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.ProductPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.ProductResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.IProductHandler;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import static com.pragma.powerup.stockservice.configuration.Constants.*;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -41,6 +38,24 @@ public class ProductRestController {
         productHandler.createProduct(productCreateRequestDto);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(Collections.singletonMap(RESPONSE_MESSAGE_KEY, PRODUCT_CREATED_MESSAGE));
+    }
+
+    @Operation(summary = "Get Product Pagination",
+        responses = {
+                @ApiResponse(responseCode = "201", description = "Product pagination was successful",
+                        content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Map"))),
+                @ApiResponse(responseCode = "409", description = "Product pagination failed.",
+                        content = @Content(mediaType = "application/json", schema = @Schema(ref = "#/components/schemas/Error")))})
+    @GetMapping("/products")
+    public ResponseEntity<PagedList<ProductResponseDto>> getPagedProducts(
+            @RequestParam int pageNumber,
+            @RequestParam int pageSize,
+            @RequestParam(required = false) String orderBy,
+            @RequestParam(required = false) boolean isAscending
+    ) {
+        ProductPagingRequestDto requestDto = new ProductPagingRequestDto(pageNumber, pageSize, orderBy, isAscending);
+        PagedList<ProductResponseDto> products = productHandler.getPagedProducts(requestDto);
+        return ResponseEntity.ok(products);
     }
 
 //    @Operation(summary = "Updated a Product",

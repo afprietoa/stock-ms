@@ -1,6 +1,6 @@
 package com.pragma.powerup.stockservice.domains.usecase;
 
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.api.IBrandServicePort;
 import com.pragma.powerup.stockservice.domains.exceptions.BrandFieldIsRequiredException;
 import com.pragma.powerup.stockservice.domains.exceptions.BrandFieldIsTooLongException;

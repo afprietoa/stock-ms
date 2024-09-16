@@ -1,10 +1,7 @@
 package com.pragma.powerup.stockservice.adapters.driving.http.controller;
 
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryCreateRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryUpdateRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryListResponseDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPaginationResponseDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.ICategoryHandler;
 import com.pragma.powerup.stockservice.domains.model.PagedList;
@@ -14,14 +11,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import static com.pragma.powerup.stockservice.configuration.Constants.*;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -63,7 +58,7 @@ public class CategoryRestController {
         requestDto.setOrderBy(orderBy);
         requestDto.setAscending(isAscending);
 
-        PagedList<CategoryResponseDto> categories = categoryHandler.getCategoriesPaged(requestDto);
+        PagedList<CategoryResponseDto> categories = categoryHandler.getPagedCategories(requestDto);
         return ResponseEntity.ok(categories);
     }
 

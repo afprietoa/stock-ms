@@ -4,7 +4,7 @@ import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.adapter.Categor
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.entity.CategoryEntity;
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.mappers.ICategoryEntityMapper;
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.repositories.ICategoryRepository;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.model.Category;
 import com.pragma.powerup.stockservice.domains.model.PagedList;
 import org.junit.jupiter.api.BeforeEach;

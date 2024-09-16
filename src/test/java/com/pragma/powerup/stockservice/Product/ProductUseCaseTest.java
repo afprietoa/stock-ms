@@ -1,9 +1,11 @@
 package com.pragma.powerup.stockservice.Product;
 
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.ProductCreateRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.ProductPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.exceptions.ProductBrandNotFoundException;
 import com.pragma.powerup.stockservice.domains.exceptions.ProductCategoryInvalidException;
 import com.pragma.powerup.stockservice.domains.exceptions.ProductCategoryRepeatedException;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.model.Product;
 import com.pragma.powerup.stockservice.domains.spi.IBrandPersistencePort;
 import com.pragma.powerup.stockservice.domains.spi.ICategoryPersistencePort;
@@ -78,5 +80,23 @@ public class ProductUseCaseTest {
 
         Exception exception = assertThrows(ProductBrandNotFoundException.class, () -> productUseCase.createProduct(product));
         assertEquals("Marca no encontrada", exception.getMessage());
+    }
+
+    @Test
+    public void getPaginationProducts_ShouldReturnPagedProducts() {
+        // Arrange
+        ProductPagingRequestDto requestDto = new ProductPagingRequestDto();
+        requestDto.setPageNumber(1);
+        requestDto.setPageSize(10);
+
+        PagedList<Product> pagedProducts = new PagedList<>(List.of(new Product()), 1, 10, 1);
+        when(productPersistencePort.getPaginationProducts(requestDto)).thenReturn(pagedProducts);
+
+        // Act
+        PagedList<Product> result = productUseCase.getPaginationProductByOrder(requestDto);
+
+        // Assert
+        assertEquals(1, result.getTotalElements());
+        assertEquals(1, result.getTotalPages());
     }
 }

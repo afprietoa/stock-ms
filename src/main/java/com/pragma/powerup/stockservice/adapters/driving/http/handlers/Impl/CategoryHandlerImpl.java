@@ -1,10 +1,7 @@
 package com.pragma.powerup.stockservice.adapters.driving.http.handlers.Impl;
 
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryCreateRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryUpdateRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryListResponseDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPaginationResponseDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.ICategoryHandler;
 import com.pragma.powerup.stockservice.adapters.driving.http.mapper.ICategoryRequestMapper;
@@ -13,7 +10,6 @@ import com.pragma.powerup.stockservice.domains.api.ICategoryServicePort;
 import com.pragma.powerup.stockservice.domains.model.Category;
 import com.pragma.powerup.stockservice.domains.model.PagedList;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +28,7 @@ public class CategoryHandlerImpl implements ICategoryHandler {
     }
 
     @Override
-    public PagedList<CategoryResponseDto> getCategoriesPaged(CategoryPagingRequestDto requestDto) {
+    public PagedList<CategoryResponseDto> getPagedCategories(CategoryPagingRequestDto requestDto) {
         PagedList<Category> pagedCategories = categoryServicePort.getPaginationCategoryByOrder(requestDto);
         List<CategoryResponseDto> responseDtos = pagedCategories.getContent().stream()
                 .map(categoryResponseMapper::toCategoryResponseDto)

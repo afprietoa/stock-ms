@@ -1,6 +1,6 @@
 package com.pragma.powerup.stockservice.Brand;
 
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.exceptions.*;
 import com.pragma.powerup.stockservice.domains.model.Brand;
 import com.pragma.powerup.stockservice.domains.model.PagedList;

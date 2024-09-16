@@ -1,7 +1,7 @@
 package com.pragma.powerup.stockservice.adapters.driving.http.controller;
 
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandCreateRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandUpdateRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.*;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.IBrandHandler;
 import com.pragma.powerup.stockservice.domains.model.PagedList;
@@ -11,14 +11,12 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import static com.pragma.powerup.stockservice.configuration.Constants.*;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -60,7 +58,7 @@ public class BrandRestController {
         requestDto.setOrderBy(orderBy);
         requestDto.setAscending(isAscending);
 
-        PagedList<BrandResponseDto> brands = brandHandler.getBrandsPaged(requestDto);
+        PagedList<BrandResponseDto> brands = brandHandler.getPagedBrands(requestDto);
         return ResponseEntity.ok(brands);
     }
 

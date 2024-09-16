@@ -2,13 +2,9 @@ package com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.adapter;
 
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.entity.BrandEntity;
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.exceptions.BrandNotFoundException;
-import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.exceptions.NoDataFoundException;
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.mappers.IBrandEntityMapper;
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.repositories.IBrandRepository;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandListResponseDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPaginationResponseDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandResponseDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.model.Brand;
 import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.spi.IBrandPersistencePort;

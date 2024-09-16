@@ -10,4 +10,5 @@ import org.mapstruct.ReportingPolicy;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IProductResponseMapper {
     Product toProduct(ProductResponseDto productResponseDto);
+    ProductResponseDto toProductResponseDto(Product product);
 }

@@ -1,10 +1,7 @@
 package com.pragma.powerup.stockservice.adapters.driving.http.handlers.Impl;
 
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandCreateRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandUpdateRequestDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandListResponseDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPaginationResponseDto;
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandPagingRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.BrandPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.BrandResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.IBrandHandler;
 import com.pragma.powerup.stockservice.adapters.driving.http.mapper.IBrandRequestMapper;
@@ -13,7 +10,6 @@ import com.pragma.powerup.stockservice.domains.api.IBrandServicePort;
 import com.pragma.powerup.stockservice.domains.model.Brand;
 import com.pragma.powerup.stockservice.domains.model.PagedList;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +28,7 @@ public class BrandHandlerImpl implements IBrandHandler {
     }
 
     @Override
-    public PagedList<BrandResponseDto> getBrandsPaged(BrandPagingRequestDto requestDto) {
+    public PagedList<BrandResponseDto> getPagedBrands(BrandPagingRequestDto requestDto) {
         PagedList<Brand> pagedBrands = brandServicePort.getPaginationBrandByOrder(requestDto);
         List<BrandResponseDto> responseDtos = pagedBrands.getContent().stream()
                 .map(brandResponseMapper::toBrandResponseDto)

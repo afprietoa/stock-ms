@@ -1,10 +1,12 @@
 package com.pragma.powerup.stockservice.domains.usecase;
 
 import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.exceptions.ProductNotFoundException;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.ProductPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.api.IProductServicePort;
 import com.pragma.powerup.stockservice.domains.exceptions.ProductBrandNotFoundException;
 import com.pragma.powerup.stockservice.domains.exceptions.ProductCategoryInvalidException;
 import com.pragma.powerup.stockservice.domains.exceptions.ProductCategoryRepeatedException;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.model.Product;
 import com.pragma.powerup.stockservice.domains.spi.IBrandPersistencePort;
 import com.pragma.powerup.stockservice.domains.spi.ICategoryPersistencePort;
@@ -74,6 +76,12 @@ public class ProductUseCase implements IProductServicePort {
 
     private Long getBrandById(Long brandId) {
         return brandPersistencePort.getBrandById(brandId);
+    }
+
+    @Override
+    public PagedList<Product> getPaginationProductByOrder(ProductPagingRequestDto requestDto) {
+        // Lógica de paginación, mapeo y validaciones necesarias
+        return productPersistencePort.getPaginationProducts(requestDto);
     }
 //
 //    @Override

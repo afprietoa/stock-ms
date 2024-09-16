@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public record ProductResponseDto(
-        Long id,
+        Long idProduct,
         String name,
         BigDecimal price,
         String description,
@@ -14,9 +14,8 @@ public record ProductResponseDto(
         BrandResponseDto brand,
         Long userId
 ) {
-    @Override
-    public Long id() {
-        return id;
+    public Long idProduct() {
+        return idProduct;
     }
 
     @Override

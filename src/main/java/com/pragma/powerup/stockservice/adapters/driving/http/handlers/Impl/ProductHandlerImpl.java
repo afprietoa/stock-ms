@@ -1,28 +1,49 @@
 package com.pragma.powerup.stockservice.adapters.driving.http.handlers.Impl;
 
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.ProductCreateRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.ProductPagingRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.ProductUpdateRequestDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.ProductListResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.ProductPaginationResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.ProductResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.handlers.IProductHandler;
+import com.pragma.powerup.stockservice.adapters.driving.http.mapper.IProductResponseMapper;
 import com.pragma.powerup.stockservice.adapters.driving.http.mapper.IProductRequestMapper;
 import com.pragma.powerup.stockservice.domains.api.IProductServicePort;
+import com.pragma.powerup.stockservice.domains.model.PagedList;
+import com.pragma.powerup.stockservice.domains.model.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class ProductHandlerImpl implements IProductHandler {
     private final IProductServicePort productServicePort;
     private final IProductRequestMapper productRequestMapper;
+    private final IProductResponseMapper productResponseMapper;
 
     @Override
     public void createProduct(ProductCreateRequestDto productCreateRequestDto) {
         productServicePort.createProduct(productRequestMapper.toCreateProduct(productCreateRequestDto));
+    }
+
+    @Override
+    public PagedList<ProductResponseDto> getPagedProducts(ProductPagingRequestDto requestDto) {
+        PagedList<Product> pagedProducts = productServicePort.getPaginationProductByOrder(requestDto);
+        List<ProductResponseDto> responseDtos = pagedProducts.getContent().stream()
+                .map(productResponseMapper::toProductResponseDto)
+                .collect(Collectors.toList());
+
+        return new PagedList<>(
+                responseDtos,
+                pagedProducts.getPageNumber(),
+                pagedProducts.getPageSize(),
+                pagedProducts.getTotalElements()
+        );
     }
 
 //    @Override

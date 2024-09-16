@@ -6,6 +6,15 @@ public abstract class PagingParams {
     private String orderBy = "name";  // Campo por defecto para ordenar
     private boolean isAscending = true;
 
+    public PagingParams() {
+    }
+
+    public PagingParams(int pageNumber, int pageSize, boolean isAscending) {
+        this.pageNumber = pageNumber;
+        this.pageSize = pageSize;
+        this.isAscending = isAscending;
+    }
+
     public int getPageNumber() { return pageNumber; }
     public void setPageNumber(int pageNumber) { this.pageNumber = pageNumber; }
     public int getPageSize() { return pageSize; }

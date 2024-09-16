@@ -1,6 +1,6 @@
 package com.pragma.powerup.stockservice.domains.spi;
 
-import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.CategoryPagingRequestDto;
+import com.pragma.powerup.stockservice.adapters.driving.http.dto.request.CategoryPagingRequestDto;
 import com.pragma.powerup.stockservice.domains.model.Category;
 import com.pragma.powerup.stockservice.domains.model.PagedList;
 
