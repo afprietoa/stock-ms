@@ -44,6 +44,11 @@ public class CategoryHandlerImpl implements ICategoryHandler {
         );
     }
 
+    @Override
+    public Category getCategory(Long idCategory) {
+        return categoryServicePort.findCategoryById(idCategory);
+    }
+
 //    @Override
 //    public void updateCategory(CategoryUpdateRequestDto CategoryUpdateRequestDto) {
 //        categoryServicePort.updateCategory(categoryRequestMapper.toUpdateCategory(CategoryUpdateRequestDto));

@@ -7,6 +7,8 @@ public record CategoryResponseDto(
         String name,
         String description
 ) {
+
+
     @Override
     public Long idCategory() {
         return idCategory;

@@ -8,7 +8,7 @@ public interface ICategoryPersistencePort {
     void saveCategory(Category category);
     Category getCategoryByName(String categoryName);
     PagedList<Category> getPaginationCategories(CategoryPagingRequestDto requestDto);
-
+    Category findCategoryById(Long categoryId);
     Long getCategoryById(Long categoryId);
 //    Page<CategoryPaginationResponseDto> getPaginationCategory(Integer pageSize, String sortBy);
 //    List<CategoryListResponseDto> getListCategory();

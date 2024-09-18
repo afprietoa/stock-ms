@@ -55,8 +55,14 @@ public class CategoryMySqlAdapter implements ICategoryPersistencePort {
     @Override
     public Long getCategoryById(Long categoryId) {
         CategoryEntity categoryEntity = categoryRepository.findById(categoryId)
-                .orElseThrow(CategoryNotFoundException::new);
+                .orElseThrow(() -> new CategoryNotFoundException("Category not found for id: " + categoryId));
         return categoryEntity.getIdCategory(); // Suponiendo que la entidad CategoryEntity tiene un método getIdCategory()
+    }
+
+    @Override
+    public Category findCategoryById(Long idCategory) {
+        CategoryEntity categoryEntity = categoryRepository.findById(idCategory).orElseThrow(() -> new CategoryNotFoundException("Category not found for id: " + idCategory));
+        return categoryMapper.toCategory(categoryEntity);
     }
 
 //    @Override

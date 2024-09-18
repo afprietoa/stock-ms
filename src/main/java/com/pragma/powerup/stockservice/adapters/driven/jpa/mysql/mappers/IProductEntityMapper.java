@@ -6,12 +6,12 @@ import com.pragma.powerup.stockservice.adapters.driven.jpa.mysql.entity.ProductE
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.ProductListResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.ProductPaginationResponseDto;
 import com.pragma.powerup.stockservice.adapters.driving.http.dto.response.ProductResponseDto;
+import com.pragma.powerup.stockservice.domains.model.Brand;
+import com.pragma.powerup.stockservice.domains.model.Category;
 import com.pragma.powerup.stockservice.domains.model.Product;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
-import org.mapstruct.ReportingPolicy;
+import org.mapstruct.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -23,49 +23,47 @@ import java.util.stream.Collectors;
         uses = {IBrandEntityMapper.class, ICategoryEntityMapper.class})
 public interface IProductEntityMapper {
 
-
-    @Mapping(target = "brand", source = "brandId", qualifiedByName = "mapBrandIdToBrandEntity")
-    @Mapping(target = "categories", source = "categoryIds", qualifiedByName = "mapCategoryIdsToCategoryEntities")
+    @Mapping(target = "brand", source = "brandId")
+    @Mapping(target = "categories", source = "categoryIds")
     ProductEntity toProductEntity(Product product);
 
     @Mapping(target = "brandId", source = "brand.idBrand")
-    @Mapping(target = "categoryIds", source = "categories", qualifiedByName = "mapCategoryEntitiesToCategoryIds")
+    @Mapping(target = "categoryIds", source = "categories")
     Product toProduct(ProductEntity productEntity);
 
-    // Modify to map List<Long> to Set<CategoryEntity>
-    @Named("mapCategoryIdsToCategoryEntities")
-    default Set<CategoryEntity> mapCategoryIdsToCategoryEntities(List<Long> categoryIds) {
-        if (categoryIds == null) {
-            return new HashSet<>();
-        }
-        return categoryIds.stream()
-                .map(id -> {
-                    CategoryEntity category = new CategoryEntity();
-                    category.setIdCategory(id);
-                    return category;
-                })
-                .collect(Collectors.toSet());
-    }
-
-    // Modify to map Set<CategoryEntity> to List<Long>
-    @Named("mapCategoryEntitiesToCategoryIds")
-    default List<Long> mapCategoryEntitiesToCategoryIds(Set<CategoryEntity> categoryEntities) {
-        if (categoryEntities == null) {
-            return List.of();
-        }
-        return categoryEntities.stream()
-                .map(CategoryEntity::getIdCategory)
-                .collect(Collectors.toList());
-    }
-
-    @Named("mapBrandIdToBrandEntity")
-    default BrandEntity mapBrandIdToBrandEntity(Long brandId) {
+    default BrandEntity map(Long brandId) {
         if (brandId == null) {
             return null;
         }
-        BrandEntity brand = new BrandEntity();
-        brand.setIdBrand(brandId);
-        return brand;
+        BrandEntity brandEntity = new BrandEntity();
+        brandEntity.setIdBrand(brandId);
+        return brandEntity;
+    }
+
+    default Set<CategoryEntity> map(List<Long> categoryIds) {
+        if (categoryIds == null) {
+            return null;
+        }
+        Set<CategoryEntity> categoryEntities = new HashSet<>();
+        for (Long categoryId : categoryIds) {
+            CategoryEntity categoryEntity = new CategoryEntity();
+            categoryEntity.setIdCategory(categoryId);
+            categoryEntities.add(categoryEntity);
+        }
+
+        return categoryEntities;
+    }
+
+    default List<Long> map(Set<CategoryEntity> categories) {
+        if (categories == null) {
+            return null;
+        }
+        List<Long> categoryIds = new ArrayList<>();
+        for (CategoryEntity category : categories) {
+            categoryIds.add(category.getIdCategory());
+        }
+
+        return categoryIds;
     }
 
 //    Product toProduct(ProductEntity productEntity);

@@ -33,11 +33,12 @@ public class ProductEntity {
     private String urlImage;
     @Column(name="quantity")
     private BigDecimal quantity;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "brand_id")
     private BrandEntity brand;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     @JoinTable(
             name = "products_categories",
             joinColumns = @JoinColumn(name = "id_product"),

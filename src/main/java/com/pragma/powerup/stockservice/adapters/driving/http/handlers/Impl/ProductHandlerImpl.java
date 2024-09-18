@@ -12,6 +12,8 @@ import com.pragma.powerup.stockservice.adapters.driving.http.mapper.IProductRequ
 import com.pragma.powerup.stockservice.domains.api.IProductServicePort;
 import com.pragma.powerup.stockservice.domains.model.PagedList;
 import com.pragma.powerup.stockservice.domains.model.Product;
+import com.pragma.powerup.stockservice.domains.spi.IBrandPersistencePort;
+import com.pragma.powerup.stockservice.domains.spi.ICategoryPersistencePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class ProductHandlerImpl implements IProductHandler {
     private final IProductServicePort productServicePort;
     private final IProductRequestMapper productRequestMapper;
     private final IProductResponseMapper productResponseMapper;
+    private final IBrandPersistencePort brandPersistencePort;
+    private final ICategoryPersistencePort categoryPersistencePort;
 
     @Override
     public void createProduct(ProductCreateRequestDto productCreateRequestDto) {
@@ -34,8 +38,9 @@ public class ProductHandlerImpl implements IProductHandler {
     @Override
     public PagedList<ProductResponseDto> getPagedProducts(ProductPagingRequestDto requestDto) {
         PagedList<Product> pagedProducts = productServicePort.getPaginationProductByOrder(requestDto);
+
         List<ProductResponseDto> responseDtos = pagedProducts.getContent().stream()
-                .map(productResponseMapper::toProductResponseDto)
+                .map(product -> productResponseMapper.toProductResponseDto(product, brandPersistencePort, categoryPersistencePort))
                 .collect(Collectors.toList());
 
         return new PagedList<>(

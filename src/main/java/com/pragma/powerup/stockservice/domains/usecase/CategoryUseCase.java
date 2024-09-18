@@ -48,6 +48,10 @@ public class CategoryUseCase implements ICategoryServicePort {
         return categoryPersistencePort.getPaginationCategories(requestDto);
     }
 
+    @Override
+    public Category findCategoryById(Long idCategory) {
+        return categoryPersistencePort.findCategoryById(idCategory);
+    }
 
 //    @Override
 //    public void updateCategory(Category category) {

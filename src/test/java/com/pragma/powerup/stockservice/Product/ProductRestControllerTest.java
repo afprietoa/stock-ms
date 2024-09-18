@@ -84,7 +84,7 @@ public class ProductRestControllerTest {
                 BigDecimal.valueOf(100), // price
                 "Description", // description
                 "urlImage", // urlImage
-                10L, // quantity
+                BigDecimal.valueOf(10), // quantity
                 categories, // category (puede ser lista vacía)
                 brand, // brand
                 1L // userId

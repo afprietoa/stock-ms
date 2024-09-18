@@ -44,6 +44,11 @@ public class BrandHandlerImpl implements IBrandHandler {
         );
     }
 
+    @Override
+    public Brand getBrand(Long idBrand) {
+        return brandServicePort.findBrandById(idBrand);
+    }
+
 //    @Override
 //    public void updateBrand(BrandUpdateRequestDto BrandUpdateRequestDto) {
 //        brandServicePort.updateBrand(brandRequestMapper.toUpdateBrand(BrandUpdateRequestDto));

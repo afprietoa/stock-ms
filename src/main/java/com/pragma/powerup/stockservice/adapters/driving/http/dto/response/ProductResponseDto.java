@@ -9,8 +9,8 @@ public record ProductResponseDto(
         BigDecimal price,
         String description,
         String urlImage,
-        Long quantity,
-        List<CategoryResponseDto> category,
+        BigDecimal quantity,
+        List<CategoryResponseDto> categories,
         BrandResponseDto brand,
         Long userId
 ) {
@@ -39,13 +39,13 @@ public record ProductResponseDto(
     }
 
     @Override
-    public Long quantity() {
+    public BigDecimal quantity() {
         return quantity;
     }
 
     @Override
-    public List<CategoryResponseDto> category() {
-        return category;
+    public List<CategoryResponseDto> categories() {
+        return categories;
     }
 
     @Override

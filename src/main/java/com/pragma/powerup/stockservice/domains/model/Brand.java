@@ -14,6 +14,7 @@ public class Brand {
         this.description = description;
     }
 
+
     public Long getIdBrand() {
         return idBrand;
     }

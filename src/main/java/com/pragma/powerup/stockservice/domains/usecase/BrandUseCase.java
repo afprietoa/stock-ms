@@ -49,6 +49,10 @@ public class BrandUseCase implements IBrandServicePort {
         return brandPersistencePort.getPaginationBrands(requestDto);
     }
 
+    @Override
+    public Brand findBrandById(Long idBrand) {
+        return brandPersistencePort.findBrandById(idBrand);
+    }
 
 //    @Override
 //    public void updateBrand(Brand brand) {

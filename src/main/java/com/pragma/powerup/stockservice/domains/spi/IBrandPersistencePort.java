@@ -8,7 +8,7 @@ public interface IBrandPersistencePort {
     void saveBrand(Brand brand);
     Brand getBrandByName(String brandName);
     PagedList<Brand> getPaginationBrands(BrandPagingRequestDto requestDto);
-
+    Brand findBrandById(Long brandId);
     Long getBrandById(Long brandId);
 //    Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy);
 //    List<BrandListResponseDto> getListBrand();

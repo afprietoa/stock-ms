@@ -55,8 +55,14 @@ public class BrandMySqlAdapter implements IBrandPersistencePort {
     @Override
     public Long getBrandById(Long brandId) {
         BrandEntity brandEntity = brandRepository.findById(brandId)
-                .orElseThrow(BrandNotFoundException::new);
+                .orElseThrow(() -> new BrandNotFoundException("Brand not found for id: " + brandId));
         return brandEntity.getIdBrand(); // Suponiendo que la entidad BrandEntity tiene un método getIdBrand()
+    }
+
+    @Override
+    public Brand findBrandById(Long idBrand) {
+        BrandEntity brandEntity = brandRepository.findById(idBrand).orElseThrow(() -> new BrandNotFoundException("Brand not found for id: " + idBrand));
+        return brandMapper.toBrand(brandEntity);
     }
 
 //    @Override

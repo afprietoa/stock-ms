@@ -7,6 +7,7 @@ import com.pragma.powerup.stockservice.domains.model.PagedList;
 public interface IBrandServicePort {
     void createBrand(Brand brand);
     PagedList<Brand> getPaginationBrandByOrder(BrandPagingRequestDto requestDto);
+    Brand findBrandById(Long brandId);
 //    void updateBrand(Brand brand);
 //    Page<BrandPaginationResponseDto> getPaginationBrand(Integer pageSize, String sortBy);
 //    List<BrandListResponseDto> getListBrand();
